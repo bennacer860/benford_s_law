@@ -4,15 +4,19 @@ require 'colored'
 class Benford
 
 	def initialize()
-    	@data = randomize_data_set(22320)	
+    	@data = randomize_data_set(12320,true)	
     	# puts @data 	
     	hash=compute_first_digit_frequency(@data)
     	draw_percentage(hash)
 	end	
 
 	#return an integer array 
-	def randomize_data_set(max)
-		(1...max).to_a #.sample(max/2)
+	def randomize_data_set(max,sample=false)
+		if sample
+			(1...max).to_a.sample(max/2)
+		else
+			(1...max).to_a
+		end			
 	end
 
 	#return a hash with the frequency of the first digit in the dataset
