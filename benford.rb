@@ -74,6 +74,5 @@ end
 
 time = Benchmark.measure do
 	b=Benford.new	
-	puts b.compute_error_margin(50,70) 
 end
 puts time*1000
