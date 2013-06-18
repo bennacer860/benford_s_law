@@ -43,7 +43,12 @@ class Benford
 		puts hash
 		hash.each { |k,v|
 			s = '-' * v.round
-			puts "#{k}: #{s}|"
+			benford_prediction = compute_benford_prediction(k.to_i)
+			error_margin = compute_error_margin(v,benford_prediction)
+			print "#{k}: #{s}|"
+			print "result:#{v.round(2)}%"
+			print "-error:#{error_margin.round(2)}%".red
+			puts ""
 		}
 	end
 
