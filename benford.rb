@@ -1,4 +1,5 @@
 require 'benchmark'
+require 'colored'
 
 class Benford
 
