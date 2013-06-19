@@ -4,9 +4,9 @@ require 'csv'
 
 class Benford
 
-	def initialize()
+	def initialize(fname,attribute)
     	# @data = randomize_data_set(12320,true)	
-    	@data = load_file("data.csv","Population")
+    	@data = load_file(fname,attribute)
     	# puts @data 	
     	hash=compute_first_digit_frequency(@data)
     	draw_percentage(hash)
@@ -86,6 +86,6 @@ end
 
 
 time = Benchmark.measure do
-	b=Benford.new	
+	b=Benford.new("data.csv","Population")	
 end
 puts time*1000
