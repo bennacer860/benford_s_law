@@ -3,14 +3,13 @@ require 'colored'
 require 'csv'
 
 class Benford
-
 	def initialize(fname,attribute)
-    	# @data = randomize_data_set(12320,true)	
-    	@data = load_file(fname,attribute)
-    	# puts @data 	
-    	hash=compute_first_digit_frequency(@data)
-    	draw_percentage(hash)
-    	load_file("data.csv","Population")
+	    	# @data = randomize_data_set(12320,true)	
+	    	@data = load_file(fname,attribute)
+	    	# puts @data 	
+	    	hash=compute_first_digit_frequency(@data)
+	    	draw_percentage(hash)
+	    	load_file("data.csv","Population")
 	end	
 
 	#return an integer array 
@@ -51,7 +50,6 @@ class Benford
 		frequency.each do |k,v|
 			frequency[k]=(100.0*v/dataset_size).round(2)
 		end
-
 		#sort
 		Hash[frequency.sort]
 	end
@@ -71,16 +69,14 @@ class Benford
 
 	#compute the benford prediction based on his formula
 	def compute_benford_prediction(n)
-    	p=Math.log(1+(1.0/n),10) * 100
-    	return p.round(2)
+    		p=Math.log(1+(1.0/n),10) * 100
+    		return p.round(2)
 	end
 
 	#compute the error margin
 	def compute_error_margin(result,prediction)
 		return  ((result.to_f-prediction.to_f)/prediction.to_f).abs*100
 	end
-
-
 end
 
 
