@@ -1,13 +1,16 @@
 require 'benchmark'
 require 'colored'
+require 'csv'
 
 class Benford
 
 	def initialize()
-    	@data = randomize_data_set(12320,true)	
+    	# @data = randomize_data_set(12320,true)	
+    	@data = load_file("data.csv","Population")
     	# puts @data 	
     	hash=compute_first_digit_frequency(@data)
     	draw_percentage(hash)
+    	load_file("data.csv","Population")
 	end	
 
 	#return an integer array 
@@ -17,6 +20,16 @@ class Benford
 		else
 			(1...max).to_a
 		end			
+	end
+
+	#load data from csv file
+	def load_file(fname,attribute)
+		csv_text = File.read(fname)
+		data = Array.new()
+		CSV.parse(csv_text, :headers => true) do |row|
+			data << row[attribute]
+		end
+ 		return data
 	end
 
 	#return a hash with the frequency of the first digit in the dataset
