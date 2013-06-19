@@ -7,6 +7,8 @@ The interesting part is that i haven't used any external library to draw the bar
 If you think that these charts would lack of accuracy you will be totally right. I am trying to compensate for this lack
 of accuracy by computing the margin of error between the result obtained from the data set and Benford's predictions.
 
+http://en.wikipedia.org/wiki/Benford's_law
+
 Here is an example of output:
 
 ```
