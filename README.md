@@ -47,6 +47,7 @@ $ ruby benford.rb log
  ```
  
 TODO  
--compute the mean absolute deviation to score the result 
+-Compute the mean absolute deviation to score the result  
+-Create a dataset with fibonacci serie and test it
  
 
