@@ -43,5 +43,10 @@ $ ruby benford.rb log
 7: |result:-0.01 (0.99%).-error:82.93%
 8: ---|result:0.25 (1.19%).-error:76.76%
 9: -------|result:0.67 (1.59%).-error:65.28%
- 30.000000  10.000000  40.000000 ( 33.972979)```
+ 30.000000  10.000000  40.000000 ( 33.972979)
+ ```
+ 
+TODO  
+-compute the mean absolute deviation to score the result 
+ 
 
