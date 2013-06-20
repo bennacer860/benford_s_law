@@ -21,14 +21,13 @@ class Benford
 
   # Private: Return an integer array
   def randomize_data_set(max, sample = false)
-    sample ? (1...max).to_a.sample(max/2) : (1...max).to_a
+    sample ? (1...max).to_a.sample(max / 2) : (1...max).to_a
   end
 
   # Private: Load data from a CSV file
   def load_file(file_name, attribute)
-    csv_text = File.read(file_name)
     data = []
-    CSV.parse(csv_text, :headers => true) do |row|
+    CSV.parse(File.read(file_name), :headers => true) do |row|
       data << row[attribute]
     end
     data
@@ -66,7 +65,7 @@ class Benford
     hash.each do |key, value|
       s = '-' * value.round
       benford_prediction = compute_benford_prediction(key.to_i)
-      error_margin = compute_error_margin(value,benford_prediction)
+      error_margin = compute_error_margin(value, benford_prediction)
       print "#{key}: #{s}|"
       print "result:#{value.round(2)}%"
       print " - error:#{error_margin.round(2)}%".red
