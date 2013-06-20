@@ -69,6 +69,6 @@ Overall, two external (non-standard-library) libraries are used. The first one b
 - http://www.youtube.com/watch?v=XXjlR2OK1kM
 - http://www.isaca.org/Journal/Past-Issues/2011/Volume-3/Pages/Understanding-and-Applying-Benfords-Law.aspx
 
-# To Do
+## To Do
 - Compute the mean absolute deviation to score the result
 - Create a dataset with Fibonacci series and test it
