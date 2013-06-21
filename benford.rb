@@ -54,6 +54,7 @@ class Benford
 
   # Private: Draws a percentage chart (using the ascii_charts gem)
   def draw_ascii_chart(hash)
+    puts hash if @args.include?('--hash')
     array = []
     hash.each { |key, value| array << [key, value] }
     puts AsciiCharts::Cartesian.new(array).draw
