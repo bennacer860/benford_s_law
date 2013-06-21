@@ -60,11 +60,10 @@ class Benford
     puts AsciiCharts::Cartesian.new(array).draw
   end
 
-  # Private: Draws a percentage graph
+  # Private: Draws a percentage graph (set log to true to draw Base 10 log)
   def draw_percentage(hash,log=false)
     puts hash if @args.include?('--hash')
-    hash.each do |key, value|
-      #if we want to draw the chart using base 10 log 	
+    hash.each do |key, value|	
       if log	
         logv = Math.log2(value)
         display_multiplier = 10
