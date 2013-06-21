@@ -83,8 +83,7 @@ class Benford
 
   # Private: Computes Benford's prediction using his formula
   def compute_benford_prediction(n)
-    p = Math.log(1 + (1.0 / n), 10) * 100
-    p.round(2)
+    (Math.log(1 + (1.0 / n), 10) * 100).round(2)
   end
 
   # Private: Computes the error margin
