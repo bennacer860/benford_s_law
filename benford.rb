@@ -60,7 +60,6 @@ class Benford
     puts AsciiCharts::Cartesian.new(array).draw
   end
 
-
   # Private: Draws a percentage graph
   def draw_percentage(hash,log=false)
     puts hash if @args.include?('--hash')
