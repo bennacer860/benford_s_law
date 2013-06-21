@@ -12,7 +12,7 @@ class Benford
     if @args.include?('--ascii_chart')
       draw_ascii_chart(hash)
     else
-      @args.include?('--log') ? draw_log_percentage(hash) : draw_percentage(hash)
+      @args.include?('--log') ? draw_percentage(hash,true) : draw_percentage(hash)
     end
     @data
   end
@@ -60,33 +60,25 @@ class Benford
     puts AsciiCharts::Cartesian.new(array).draw
   end
 
-  # Private: Draws a percentage graph
-  def draw_percentage(hash)
-    puts hash if @args.include?('--hash')
-    hash.each do |key, value|
-      s = '-' * value.round
-      benford_prediction = compute_benford_prediction(key.to_i)
-      error_margin = compute_error_margin(value, benford_prediction)
-      print "#{key}: #{s}|"
-      print "result:#{value.round(2)}%"
-      print " - error:#{error_margin.round(2)}%".red
-      puts
-    end
-  end
 
-  # Private: Draws a percentage log graph
-  def draw_log_percentage(hash)
+  # Private: Draws a percentage graph
+  def draw_percentage(hash,log=false)
     puts hash if @args.include?('--hash')
     hash.each do |key, value|
-      logv = Math.log2(value)
-      display_multiplier = 10
-      s = '-' * (display_multiplier * logv).round
+      #if we want to draw the chart using base 10 log 	
+      if log	
+        logv = Math.log2(value)
+        display_multiplier = 10
+        s = '-' * (display_multiplier * logv).round
+      else
+      	s = '-' * value.round
+      end  
       benford_prediction = compute_benford_prediction(key.to_i)
       error_margin = compute_error_margin(value, benford_prediction)
       print "#{key}: #{s}|"
-      print "result:#{logv.round(2)} (#{value.round(2)}%)."
-      print " - error:#{error_margin.round(2)}%".red
-      puts
+      log == true ? result = "result:#{logv.round(2)} (#{value.round(2)}%)." : result = "result:#{value.round(2)}%" 
+      print result
+      print " - error:#{error_margin.round(2)}%\n".red
     end
   end
 
