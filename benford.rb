@@ -9,11 +9,9 @@ class Benford
     @args = ARGV
     @data = load_file(file_name, attribute)
     hash  = compute_first_digit_frequency(@data)
-    if @args.include?('--ascii_chart')
-      draw_ascii_chart(hash)
-    else
-      @args.include?('--log') ? draw_percentage(hash,true) : draw_percentage(hash)
-    end
+    @lms  = compute_the_least_mean_square(hash)
+    @args.include?('--log') ? draw_percentage(hash,true) : draw_percentage(hash)
+    draw_ascii_chart(hash) if @args.include?('--ascii_chart')
     @data
   end
 
@@ -58,6 +56,8 @@ class Benford
     array = []
     hash.each { |key, value| array << [key, value] }
     puts AsciiCharts::Cartesian.new(array).draw
+    puts "\nThe least mean square for this dataset is #{@lms}".blue if @args.include?('--lms')
+    puts '-' * 50
   end
 
   # Private: Draws a percentage graph (set log to true to draw Base 10 log)
@@ -78,6 +78,8 @@ class Benford
       print result
       print " - error:#{error_margin.round(2)}%\n".red
     end
+    puts "\nThe least mean square for this dataset is #{@lms}".blue if @args.include?('--lms')
+    puts '-' * 50
   end
 
   # Private: Computes Benford's prediction using his formula
@@ -88,5 +90,19 @@ class Benford
   # Private: Computes the error margin
   def compute_error_margin(result,prediction)
     ((result.to_f - prediction.to_f) / prediction.to_f).abs * 100
+  end
+
+  #Private: Compute the least mean square
+  def compute_the_least_mean_square(hash)
+    benford_prediction = {"1"=>30.1, "2"=>17.6, "3"=>12.5, "4"=>9.7, "5"=>7.9, "6"=>6.7, "7"=>5.8, "8"=>5.1, "9"=>4.6}  
+    #LMS = sum( (data(i)-prediction(i))^2 )  / sum( data(i)^2 )
+    numerator = 0
+    denominator = 0
+    hash.each do |key,value|
+      numerator += (value-benford_prediction[key])**2    
+      # puts benford_prediction[key]
+      denominator += value**2  
+    end  
+    return (numerator/denominator).round(2)
   end
 end
